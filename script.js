@@ -1,11 +1,3 @@
-
-// $('body').animate({
-//     color: '#ffffff',
-//     opacity:0.3
-//       }, 300);
-
-
-
 $(document).ready(function(){
 
 
@@ -40,9 +32,11 @@ function update(){
         let newColor = (`hsl(${h},${s},${l})`);
         return newColor;
     }
-    ring.style.borderColor = newColor();
-    time.style.color = newColor();
-    ampm.css('color', newColor());
+
+    // ring.style.borderColor = newColor();
+    // time.style.color = newColor();
+    // ampm.css('color', newColor());
+    $('body').animate({'background-color': newColor()}, 1000);
 
 }
 update();
