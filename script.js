@@ -105,13 +105,15 @@ function BWtoggle(){
         
         let transitionTime = 1000;
         (o > 127) ? 
-            $('#hex, #time').add(ampm).animate({'color': black}, transitionTime)
+            $('#hex, #time, .btn').add(ampm).animate({'color': black}, transitionTime)
             : 
             $('#hex, #time').add(ampm).animate({'color': white}, transitionTime);
         (o > 127) ? 
-            $('#ring').animate({'border-color': black}, transitionTime) 
+            $('#ring, .btn').animate({'border-color': black}, transitionTime) 
             : 
-            $('#ring').animate({'border-color': white}, transitionTime);
+            $('#ring, .btn').animate({'border-color': white}, transitionTime);
+
+        
 
 }
 
@@ -124,9 +126,19 @@ $('#clock-container').click(function(){
     $(time).toggle( );
     $(ampm).toggle( );
     $(hex).toggle( );
-    $(this).toggleClass('BW');
+    // $(this).toggleClass('BW');
 });
 
+$('#color').click(function(){
+    $(this).addClass('active');
+    $(this).siblings().removeClass('active');
+    $('#clock-container').removeClass('BW');
+});
+$('#blackwhite').click(function(){
+    $(this).addClass('active');
+    $(this).siblings().removeClass('active');
+    $('#clock-container').addClass('BW');
+});
 
 
 

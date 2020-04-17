@@ -32,7 +32,7 @@ body{
 }
 
 #clock-container:hover{
-    transform: translate(-50%, -50%) scale(1.1) ;
+    transform: translate(-50%, -50%) scale(1.05) ;
 }
 
 #colorMode{
@@ -40,29 +40,31 @@ body{
     --size: calc(var(--typeSize) * 1);
     width:auto;
     height:auto;
-    /* background-color: green; */
     position: absolute;
     top: 1em;
     left:1em;
     text-align: center;
     margin: auto;
     font-family: Helvetica, Arial, sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     font-size: calc(var(--typeSize)/7.5);
     text-transform: uppercase;
 }
 .btn{
     display: inline-block;
-    /* background-color:yellow; */
-    padding: .3em .9em;
+    padding: .4em 1em;
     margin-right: .5em;
-    border: 1px solid white;
+    border: .09em solid white;
     transition: .25s ease;
+    border-radius: 1.3em;
+    transform: translateY(0px);
+    transition: transform .2s ease-out;
 }
 .btn:hover{
-    background-color: white;
-    color:black;
+    transform: translateY(6px);
 }
+
+
 
 .content{
     z-index:10;
