@@ -3,15 +3,15 @@ $(document).ready(function(){
 
 let time = document.getElementById('time');
 let hex = document.getElementById('hex');
-let color = document.getElementById('color');
 let ring = document.getElementById('ring');
-let solid = document.getElementById('solid');
 let ampm = $('#ampm');
+let black = "#000000";
+let white = "#FFFFFF";
+let colorMode = 0;
 
 $(time).show();
 $(ampm).show();
 $(hex).hide();
-
 
 
 function update(){
@@ -19,27 +19,33 @@ function update(){
     let hour = date.getHours();
     let minute = date.getMinutes();
     let second = date.getSeconds();
-
+    let transitionTime;
     let hour_12 = timeConverter(hour);
-    let hexVal = timeToHex(hour, minute, second);
+    // hexVal = timeToHex(hour, minute, second);
+
+
+    if ($('#clock-container').hasClass('BW')){
+        colorMode = 1
+    }else{
+        colorMode = 0;
+    }
+
+    if(colorMode == 0){ 
+        hexVal = timeToHex(hour, minute, second);
+    }else{
+        hexVal = timeToBW(hour).split('#')[1];
+    }
 
     time.innerHTML = `${padZero(hour_12)}:${padZero(minute)}:${padZero(second)}`;   
     hex.innerHTML =`#${hexVal}`;
 
 
     function newColor(){
-        let h = second * 6;
-        let s = 70 + '%';
-        let l = 60 + '%';
-        let newColor = (`hsl(${h},${s},${l})`);
-        return newColor;
+        return `#${hexVal}`;
     }
 
-    // ring.style.borderColor = newColor();
-    // time.style.color = newColor();
-    // ampm.css('color', newColor());
     $('body').animate({'background-color': newColor()}, 1000);
-
+    BWtoggle();
 }
 update();
 setInterval(update, 1000);
@@ -77,6 +83,39 @@ function timeToHex(h,m,s){
     return (valR + valG + valB);
 }
 
+function timeToBW(h){
+    if( 5 < h < 17){return white}
+    else{return black};
+}
+
+function BWtoggle(){
+    let color = $('body').css('background-color');
+    let startIndex = color.indexOf('(') + 1;
+    let endIndex = color.indexOf(')');
+
+    let rgb = color.slice(startIndex, endIndex).split(',');
+    let o = Math.round(
+        (
+        (parseInt(rgb[0])*299) + 
+        (parseInt(rgb[1])*587) + 
+        (parseInt(rgb[2])*114)
+        ) / 1000
+        );
+        // console.log(o);
+        
+        let transitionTime = 1000;
+        (o > 127) ? 
+            $('#hex, #time').add(ampm).animate({'color': black}, transitionTime)
+            : 
+            $('#hex, #time').add(ampm).animate({'color': white}, transitionTime);
+        (o > 127) ? 
+            $('#ring').animate({'border-color': black}, transitionTime) 
+            : 
+            $('#ring').animate({'border-color': white}, transitionTime);
+
+}
+
+
 
 
 //_________interactive_________________________________
@@ -85,6 +124,7 @@ $('#clock-container').click(function(){
     $(time).toggle( );
     $(ampm).toggle( );
     $(hex).toggle( );
+    $(this).toggleClass('BW');
 });
 
 
