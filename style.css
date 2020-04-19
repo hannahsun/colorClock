@@ -3,8 +3,8 @@
     --white: rgb(240,240,240);
     --sixcaps: 'Six Caps', sans-serif;
     --teko: 'Teko', sans-serif;
-    /* --typeSize: clamp(100px, 18vw, 220px); */
-    --typeSize: 130px;
+    --typeSize: clamp(100px, 18vw, 220px);
+    /* --typeSize: 130px; */
 }
 .no-select{
     user-select: none;
@@ -97,3 +97,11 @@ body{
     border: 3px solid var(--white);
 }
 
+@media only screen and (max-width: 960px) {
+    .btn:hover{
+        transform: translateY(0);
+    }
+    #clock-container:hover{
+        transform: translate(-50%, -50%) scale(1) ;
+    }
+  }
