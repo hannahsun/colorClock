@@ -106,6 +106,17 @@ body{
     }
 
     #clock-container{
-        --typeSize: 25vw;
+        height:70vw;
+        width:70vw;
+        /* max-height: 500px;
+        max-width: 500px; */
+        font-size: 25vw;
     }
+    #colorMode{
+        font-size: 14px;
+    }
+    #ampm{
+        font-size: 8.3vw;
+    }
+
   }
